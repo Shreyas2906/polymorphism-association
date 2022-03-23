@@ -28,8 +28,8 @@ class ProductsController < ApplicationController
       if @product.save
         if params[:product][:image].present?
           params[:product][:image].each do |img|
-            # Picture.create(image: img, imageable_id: @product.id, imageable_type: "Product" )
-            @product.pictures.create(image: img)
+            Picture.create(image: img, imageable_id: @product.id, imageable_type: "Product" )
+            # @product.pictures.create(image: img)
           end 
         end
         format.html { redirect_to product_url(@product), notice: "Product was successfully created." }

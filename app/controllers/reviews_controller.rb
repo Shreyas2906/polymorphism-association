@@ -25,6 +25,13 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       if @review.save
+        byebug
+        if params[:review][:image].present?
+          params[:review][:image].each do |img|
+            # Picture.create(image: img, imageable_id: @review.id, imageable_type: "Review" )
+            @review.pictures.create(image: img)
+          end 
+        end
         format.html { redirect_to review_url(@review), notice: "Review was successfully created." }
         format.json { render :show, status: :created, location: @review }
       else
